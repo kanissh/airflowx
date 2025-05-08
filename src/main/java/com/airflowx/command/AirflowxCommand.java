@@ -1,5 +1,6 @@
 package com.airflowx.command;
 
+import com.airflowx.command.config.ConfigCommand;
 import com.airflowx.command.get.GetCommand;
 import io.quarkus.picocli.runtime.PicocliCommandLineFactory;
 import io.quarkus.picocli.runtime.annotations.TopCommand;
@@ -8,12 +9,13 @@ import org.eclipse.microprofile.config.ConfigProvider;
 import picocli.CommandLine;
 
 @TopCommand
-@CommandLine.Command(name = "airflowx",
+@CommandLine.Command(name = "afx",
     versionProvider = VersionProviderWithConfigProvider.class,
     mixinStandardHelpOptions = true,
     description = "A command-line application to interact with airflow environment",
     subcommands = {
-        GetCommand.class
+        GetCommand.class,
+        ConfigCommand.class
     })
 public class AirflowxCommand {
 

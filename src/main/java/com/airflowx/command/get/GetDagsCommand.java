@@ -5,30 +5,30 @@ import com.airflowx.dto.Dag;
 import com.airflowx.dto.DagProperty;
 import com.airflowx.dto.DagsInfo;
 import com.airflowx.service.AirflowApi;
+import com.airflowx.util.ContextHandler;
 import com.github.freva.asciitable.AsciiTable;
 import com.github.freva.asciitable.Column;
 import com.github.freva.asciitable.HorizontalAlign;
+import jakarta.inject.Inject;
 import java.util.List;
 import java.util.concurrent.Callable;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import picocli.CommandLine;
 
-@CommandLine.Command(name = "dags")
+@CommandLine.Command(name = "dags", description = "List DAGs available in the server")
 public class GetDagsCommand implements Callable<Integer> {
 
+  private final ContextHandler contextHandler;
   @CommandLine.Mixin
-  HelpMixin help;
-
-  @CommandLine.Spec
-  CommandLine.Model.CommandSpec spec;
-
+  private HelpMixin help;
   @CommandLine.Option(names = {"--active"})
-  boolean onlyActive;
-
+  private boolean onlyActive;
   @CommandLine.Option(names = {"--paused"})
-  boolean isPaused;
+  private boolean isPaused;
 
-  public GetDagsCommand() {
+  @Inject
+  public GetDagsCommand(ContextHandler contextHandler) {
+    this.contextHandler = contextHandler;
   }
 
   @Override
@@ -37,7 +37,8 @@ public class GetDagsCommand implements Callable<Integer> {
     Boolean isPausedQueryParam = null;
     List<String> fieldsQueryParam = DagProperty.getPropertiesList();
 
-    AirflowApi airflowApi = RestClientBuilder.newBuilder().baseUri("http://localhost:8080")
+    AirflowApi airflowApi = RestClientBuilder.newBuilder()
+        .baseUri(contextHandler.getCurrentContext().server())
         .build(AirflowApi.class);
 
     if (onlyActive) {
@@ -67,12 +68,11 @@ public class GetDagsCommand implements Callable<Integer> {
                     .with(dag -> dag.scheduleInterval().value())))
         .asString();
 
-    spec.commandLine().getOut().println();
-    spec.commandLine().getOut().println(dagInfoTable);
-    spec.commandLine().getOut().println();
-    spec.commandLine().getOut()
-        .println("\sTOTAL NUMBER OF ENTRIES:\s\s" + dagsInfo.dagList().size());
-    spec.commandLine().getOut().println();
+    System.out.println();
+    System.out.println(dagInfoTable);
+    System.out.println();
+    System.out.println("\sTOTAL NUMBER OF ENTRIES:\s\s" + dagsInfo.dagList().size());
+    System.out.println();
 
     return 0;
   }
