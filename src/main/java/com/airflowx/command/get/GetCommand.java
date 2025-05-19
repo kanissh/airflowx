@@ -5,8 +5,8 @@ import picocli.CommandLine;
 
 @CommandLine.Command(
     name = "get",
-    subcommands = {GetDagsCommand.class},
-    description = "Display information about DAGs")
+    subcommands = {GetDagsCommand.class, GetRunsCommand.class},
+    description = "Display dags, tasks in the airflow server")
 public class GetCommand {
 
   @CommandLine.Mixin

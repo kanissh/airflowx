@@ -1,4 +1,4 @@
-package com.airflowx.dto;
+package com.airflowx.dto.dag;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;

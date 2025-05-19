@@ -10,4 +10,8 @@ public class Strings {
     return string.trim().isEmpty();
   }
 
+  public static String getNullSafe(Object value) {
+    return value != null ? value.toString() : "NULL";
+  }
+
 }

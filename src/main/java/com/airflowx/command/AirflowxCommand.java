@@ -1,6 +1,7 @@
 package com.airflowx.command;
 
 import com.airflowx.command.config.ConfigCommand;
+import com.airflowx.command.describe.DescribeCommand;
 import com.airflowx.command.get.GetCommand;
 import io.quarkus.picocli.runtime.PicocliCommandLineFactory;
 import io.quarkus.picocli.runtime.annotations.TopCommand;
@@ -15,7 +16,8 @@ import picocli.CommandLine;
     description = "A command-line application to interact with airflow environment",
     subcommands = {
         GetCommand.class,
-        ConfigCommand.class
+        ConfigCommand.class,
+        DescribeCommand.class
     })
 public class AirflowxCommand {
 
@@ -23,7 +25,6 @@ public class AirflowxCommand {
   CommandLine getCommandLineInstance(PicocliCommandLineFactory picocliCommandLineFactory) {
     return picocliCommandLineFactory.create();
   }
-
 }
 
 class VersionProviderWithConfigProvider implements CommandLine.IVersionProvider {
