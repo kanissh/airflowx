@@ -1,12 +1,13 @@
 package com.airflowx.dto.dag;
 
-import com.airflowx.enums.DagState;
+import com.airflowx.enums.DagRunState;
 import com.airflowx.enums.RunType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.Map;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,6 +16,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Builder
 public class DagRun {
 
   @JsonProperty("dag_run_id")
@@ -54,7 +56,7 @@ public class DagRun {
   private RunType runType;
 
   @JsonProperty("state")
-  private DagState state;
+  private DagRunState state;
 
   @JsonProperty("external_trigger")
   private Boolean externalTrigger;

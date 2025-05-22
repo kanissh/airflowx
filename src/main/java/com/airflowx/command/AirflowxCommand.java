@@ -3,6 +3,9 @@ package com.airflowx.command;
 import com.airflowx.command.config.ConfigCommand;
 import com.airflowx.command.describe.DescribeCommand;
 import com.airflowx.command.get.GetCommand;
+import com.airflowx.command.set.ModifyCommand;
+import com.airflowx.command.trigger.TriggerCommand;
+import com.airflowx.exception.ExecutionExceptionHandler;
 import io.quarkus.picocli.runtime.PicocliCommandLineFactory;
 import io.quarkus.picocli.runtime.annotations.TopCommand;
 import jakarta.enterprise.inject.Produces;
@@ -17,13 +20,16 @@ import picocli.CommandLine;
     subcommands = {
         GetCommand.class,
         ConfigCommand.class,
-        DescribeCommand.class
+        DescribeCommand.class,
+        TriggerCommand.class,
+        ModifyCommand.class
     })
 public class AirflowxCommand {
 
   @Produces
   CommandLine getCommandLineInstance(PicocliCommandLineFactory picocliCommandLineFactory) {
-    return picocliCommandLineFactory.create();
+    return picocliCommandLineFactory.create()
+        .setExecutionExceptionHandler(new ExecutionExceptionHandler());
   }
 }
 

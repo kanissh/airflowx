@@ -3,7 +3,7 @@ package com.airflowx.command.get;
 import com.airflowx.command.HelpMixin;
 import com.airflowx.dto.dag.DagRun;
 import com.airflowx.dto.dag.DagRunInfo;
-import com.airflowx.enums.DagState;
+import com.airflowx.enums.DagRunState;
 import com.airflowx.service.AirflowApi;
 import com.airflowx.util.ContextHandler;
 import com.airflowx.util.Times;
@@ -15,28 +15,28 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import picocli.CommandLine;
-import picocli.CommandLine.Option;
-import picocli.CommandLine.Parameters;
 
 @CommandLine.Command(
-    name = "runs",
+    name = "run",
+    aliases = {"runs"},
     description = "Display runs of the dag ordered by the start date of the run")
 public class GetRunsCommand implements Callable<Integer> {
 
   private final ContextHandler contextHandler;
   @CommandLine.Mixin
   private HelpMixin help;
-  @Parameters(index = "0", description = "Dag id")
+  @CommandLine.Parameters(index = "0", description = "Dag id")
   private String dagId;
-  @Option(names = {"--order-reverse"}, defaultValue = "false", arity = "0",
+  @CommandLine.Option(names = {"--sort-reverse"}, defaultValue = "false", arity = "0",
       description = "Order the dag runs in ascending order of the run start date. "
           + "Default ordering is descending.")
-  private Boolean orderReverse;
-  @Option(names = {"--limit"}, defaultValue = "100", description = "Number of items to return")
-  private int limit;
-  @Option(names = {"--state"}, type = DagState.class, split = ",",
+  private Boolean sortReverse;
+  @CommandLine.Option(names = {"--limit"}, defaultValue = "100",
       description = "Number of items to return")
-  private List<String> dagStateList;
+  private int limit;
+  @CommandLine.Option(names = {"--state"}, type = DagRunState.class, split = ",",
+      description = "Number of items to return")
+  private List<String> dagRunStateList;
 
   @Inject
   public GetRunsCommand(ContextHandler contextHandler) {
@@ -50,7 +50,7 @@ public class GetRunsCommand implements Callable<Integer> {
         .build(AirflowApi.class);
 
     DagRunInfo dagRunInfo = airflowApi.getDagRuns(dagId,
-        orderReverse ? "start_date" : "-start_date", limit, dagStateList);
+        sortReverse ? "start_date" : "-start_date", limit, dagRunStateList);
 
     String dagRunsInfoTable = AsciiTable.builder()
         .border(AsciiTable.NO_BORDERS)
