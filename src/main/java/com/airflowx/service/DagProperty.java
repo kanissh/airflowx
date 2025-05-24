@@ -9,6 +9,7 @@ public interface DagProperty {
   String IS_ACTIVE = "is_active";
   String IS_PAUSED = "is_paused";
   String SCHEDULE_INTERVAL = "schedule_interval";
+  String TOTAL_ENTRIES = "total_entries";
 
   static List<String> getPropertiesList() {
     return List.of(DISPLAY_NAME, ID, IS_ACTIVE, IS_PAUSED, SCHEDULE_INTERVAL);

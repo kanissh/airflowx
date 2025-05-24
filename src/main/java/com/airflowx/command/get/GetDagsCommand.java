@@ -2,9 +2,8 @@ package com.airflowx.command.get;
 
 import com.airflowx.command.HelpMixin;
 import com.airflowx.dto.dag.Dag;
-import com.airflowx.dto.dag.DagsInfo;
+import com.airflowx.dto.dag.DagCollection;
 import com.airflowx.service.AirflowApi;
-import com.airflowx.service.DagProperty;
 import com.airflowx.util.ContextHandler;
 import com.github.freva.asciitable.AsciiTable;
 import com.github.freva.asciitable.Column;
@@ -41,19 +40,20 @@ public class GetDagsCommand implements Callable<Integer> {
 
   @Override
   public Integer call() {
-    List<String> fieldsQueryParam = DagProperty.getPropertiesList();
 
     AirflowApi airflowApi = RestClientBuilder.newBuilder()
         .baseUri(contextHandler.getCurrentContext().server())
         .build(AirflowApi.class);
 
-    DagsInfo dagsInfo = airflowApi.getDagList(onlyActive, isPaused, fieldsQueryParam,
+    //setting the field list does not return total_entries field
+    //keeping the parameter in the request and passing null to overcome this
+    DagCollection dagCollection = airflowApi.getDagList(onlyActive, isPaused, null,
         dagIdPatternString);
 
     String dagInfoTable = AsciiTable.builder()
         .border(AsciiTable.NO_BORDERS)
         .data(
-            dagsInfo.dagList(),
+            dagCollection.getDagList(),
             List.of(
                 new Column().header("DAG ID").dataAlign(HorizontalAlign.LEFT).with(Dag::getId),
                 new Column().header("DAG NAME").dataAlign(HorizontalAlign.LEFT)
@@ -69,7 +69,7 @@ public class GetDagsCommand implements Callable<Integer> {
     System.out.println();
     System.out.println(dagInfoTable);
     System.out.println();
-    System.out.println("\sTOTAL NUMBER OF ENTRIES:\s\s" + dagsInfo.dagList().size());
+    System.out.println("\sTOTAL NUMBER OF ENTRIES\s\s\s\s" + dagCollection.getTotalEntries());
     System.out.println();
 
     return 0;

@@ -1,10 +1,11 @@
 package com.airflowx.service;
 
 import com.airflowx.dto.dag.Dag;
+import com.airflowx.dto.dag.DagCollection;
 import com.airflowx.dto.dag.DagRun;
-import com.airflowx.dto.dag.DagRunInfo;
+import com.airflowx.dto.dag.DagRunCollection;
 import com.airflowx.dto.dag.DagRunModifyState;
-import com.airflowx.dto.dag.DagsInfo;
+import com.airflowx.dto.stats.DagStatsCollection;
 import com.airflowx.exception.AirflowResponseExceptionMapper;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -28,6 +29,10 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 @Consumes(MediaType.APPLICATION_JSON)
 public interface AirflowApi {
 
+  @GET
+  @Path("/dagStats")
+  DagStatsCollection getDagsStatistics(@QueryParam("dag_ids") String commaSepDagIds);
+
   @PATCH
   @Path("/dags/{dagId}/dagRuns/{dagRunId}")
   DagRun modifyDagRunState(
@@ -37,7 +42,7 @@ public interface AirflowApi {
 
   @GET
   @Path("/dags/{dagId}/dagRuns")
-  DagRunInfo getDagRuns(
+  DagRunCollection getDagRuns(
       @PathParam("dagId") String dagId,
       @QueryParam("order_by") String orderBy,
       @QueryParam("limit") int limit,
@@ -49,7 +54,7 @@ public interface AirflowApi {
 
   @GET
   @Path("/dags")
-  DagsInfo getDagList(
+  DagCollection getDagList(
       @QueryParam("only_active") Boolean onlyActive,
       @QueryParam("paused") Boolean paused,
       @QueryParam("fields") List<String> fields,
@@ -61,6 +66,6 @@ public interface AirflowApi {
 
   @GET
   @Path("/dags/{dagId}/details")
-  DagsInfo getDetailedDagInformation(@PathParam("dagId") String dagId);
+  DagCollection getDetailedDagInformation(@PathParam("dagId") String dagId);
 
 }

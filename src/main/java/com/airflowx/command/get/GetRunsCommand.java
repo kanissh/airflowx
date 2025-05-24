@@ -2,7 +2,7 @@ package com.airflowx.command.get;
 
 import com.airflowx.command.HelpMixin;
 import com.airflowx.dto.dag.DagRun;
-import com.airflowx.dto.dag.DagRunInfo;
+import com.airflowx.dto.dag.DagRunCollection;
 import com.airflowx.enums.DagRunState;
 import com.airflowx.service.AirflowApi;
 import com.airflowx.util.ContextHandler;
@@ -19,7 +19,7 @@ import picocli.CommandLine;
 @CommandLine.Command(
     name = "run",
     aliases = {"runs"},
-    description = "Display runs of the dag ordered by the start date of the run")
+    description = "Display runs of the DAG ordered by the start date of the run")
 public class GetRunsCommand implements Callable<Integer> {
 
   private final ContextHandler contextHandler;
@@ -49,13 +49,13 @@ public class GetRunsCommand implements Callable<Integer> {
         .baseUri(contextHandler.getCurrentContext().server())
         .build(AirflowApi.class);
 
-    DagRunInfo dagRunInfo = airflowApi.getDagRuns(dagId,
+    DagRunCollection dagRunCollection = airflowApi.getDagRuns(dagId,
         sortReverse ? "start_date" : "-start_date", limit, dagRunStateList);
 
     String dagRunsInfoTable = AsciiTable.builder()
         .border(AsciiTable.NO_BORDERS)
         .data(
-            dagRunInfo.dagRunList(),
+            dagRunCollection.getDagRunList(),
             List.of(
                 new Column().header("RUN ID").dataAlign(HorizontalAlign.LEFT)
                     .with(DagRun::getDagRunId),
@@ -71,7 +71,7 @@ public class GetRunsCommand implements Callable<Integer> {
                     .with(dagRun -> dagRun.getRunType().name())))
         .asString();
 
-    System.out.println("Total run entries: " + dagRunInfo.totalEntries());
+    System.out.println("Total run entries: " + dagRunCollection.getTotalEntries());
     System.out.println();
     System.out.println(dagRunsInfoTable);
     System.out.println();
