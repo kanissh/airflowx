@@ -22,6 +22,10 @@ public class GetContextsCommand implements Runnable {
     this.contextHandler = contextHandler;
   }
 
+  public GetContextsCommand() {
+    this.contextHandler = new ContextHandler();
+  }
+
 
   @Override
   public void run() {

@@ -32,6 +32,9 @@ public class SetContextCommand implements Callable<Integer> {
     this.contextHandler = contextHandler;
   }
 
+  public SetContextCommand() {
+    this.contextHandler = new ContextHandler();
+  }
 
   @Override
   public Integer call() {

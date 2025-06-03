@@ -1,5 +1,6 @@
 package com.airflowx.command;
 
+import com.airflowx.command.completion.DagIdsCompletionCandidateCommand;
 import com.airflowx.command.config.ConfigCommand;
 import com.airflowx.command.describe.DescribeCommand;
 import com.airflowx.command.get.GetCommand;
@@ -22,7 +23,8 @@ import picocli.CommandLine;
         ConfigCommand.class,
         DescribeCommand.class,
         TriggerCommand.class,
-        ModifyCommand.class
+        ModifyCommand.class,
+        DagIdsCompletionCandidateCommand.class
     })
 public class AirflowxCommand {
 

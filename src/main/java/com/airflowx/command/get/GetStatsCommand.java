@@ -1,6 +1,7 @@
 package com.airflowx.command.get;
 
 import com.airflowx.command.HelpMixin;
+import com.airflowx.completion.DagIdsCompletion;
 import com.airflowx.dto.dag.Dag;
 import com.airflowx.dto.dag.DagCollection;
 import com.airflowx.dto.stats.DagStatsCollection;
@@ -25,7 +26,7 @@ public class GetStatsCommand implements Runnable {
   private final ContextHandler contextHandler;
   @CommandLine.Mixin
   private HelpMixin help;
-  @CommandLine.Parameters(index = "0", split = ",", description = "Comma separated list of DAG ids")
+  @CommandLine.Parameters(index = "0", split = ",", description = "Comma separated list of DAG ids", completionCandidates = DagIdsCompletion.class)
   private List<String> dagIdList;
   @CommandLine.Option(names = {"--all"}, description = "List stats for all DAGs")
   private Boolean isAll;
@@ -33,6 +34,10 @@ public class GetStatsCommand implements Runnable {
   @Inject
   public GetStatsCommand(ContextHandler contextHandler) {
     this.contextHandler = contextHandler;
+  }
+
+  public GetStatsCommand() {
+    this.contextHandler = new ContextHandler();
   }
 
   private String getCommaSeparatedDagIds(AirflowApi airflowApi) {

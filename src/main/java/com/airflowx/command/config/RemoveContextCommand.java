@@ -22,6 +22,10 @@ public class RemoveContextCommand implements Callable<Integer> {
     this.contextHandler = contextHandler;
   }
 
+  public RemoveContextCommand() {
+    this.contextHandler = new ContextHandler();
+  }
+
   @Override
   public Integer call() {
     if (contextHandler.getCurrentContextName().equals(contextName)) {

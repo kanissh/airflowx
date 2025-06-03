@@ -22,6 +22,10 @@ public class UseContextCommand implements Callable<Integer> {
     this.contextHandler = contextHandler;
   }
 
+  public UseContextCommand() {
+    this.contextHandler = new ContextHandler();
+  }
+
   @Override
   public Integer call() {
     if (contextHandler.getCurrentContextName().equals(contextName)) {

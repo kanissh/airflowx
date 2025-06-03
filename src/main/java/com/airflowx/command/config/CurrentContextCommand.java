@@ -21,6 +21,10 @@ public class CurrentContextCommand implements Runnable {
     this.contextHandler = contextHandler;
   }
 
+  public CurrentContextCommand() {
+    this.contextHandler = new ContextHandler();
+  }
+
   @Override
   public void run() {
     Context currentContext = contextHandler.getCurrentContext();

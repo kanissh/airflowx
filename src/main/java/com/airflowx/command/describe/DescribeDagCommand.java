@@ -1,6 +1,7 @@
 package com.airflowx.command.describe;
 
 import com.airflowx.command.HelpMixin;
+import com.airflowx.completion.DagIdsCompletion;
 import com.airflowx.dto.dag.Dag;
 import com.airflowx.dto.dag.Tag;
 import com.airflowx.service.AirflowApi;
@@ -28,12 +29,16 @@ public class DescribeDagCommand implements Callable<Integer> {
   @CommandLine.Option(names = {"-v", "--verbose"},
       arity = "0", description = "Display detailed information")
   private boolean isVerbose;
-  @CommandLine.Parameters(index = "0", description = "Dag id")
+  @CommandLine.Parameters(index = "0", description = "Dag id", completionCandidates = DagIdsCompletion.class)
   private String dagId;
 
   @Inject
   public DescribeDagCommand(ContextHandler contextHandler) {
     this.contextHandler = contextHandler;
+  }
+
+  public DescribeDagCommand() {
+    this.contextHandler = new ContextHandler();
   }
 
   @Override

@@ -1,6 +1,7 @@
 package com.airflowx.command.get;
 
 import com.airflowx.command.HelpMixin;
+import com.airflowx.completion.DagIdsCompletion;
 import com.airflowx.dto.dag.DagRun;
 import com.airflowx.dto.dag.DagRunCollection;
 import com.airflowx.enums.DagRunState;
@@ -25,7 +26,7 @@ public class GetRunsCommand implements Callable<Integer> {
   private final ContextHandler contextHandler;
   @CommandLine.Mixin
   private HelpMixin help;
-  @CommandLine.Parameters(index = "0", description = "Dag id")
+  @CommandLine.Parameters(index = "0", description = "Dag id", completionCandidates = DagIdsCompletion.class)
   private String dagId;
   @CommandLine.Option(names = {"--sort-reverse"}, defaultValue = "false", arity = "0",
       description = "Order the dag runs in ascending order of the run start date. "
@@ -41,6 +42,10 @@ public class GetRunsCommand implements Callable<Integer> {
   @Inject
   public GetRunsCommand(ContextHandler contextHandler) {
     this.contextHandler = contextHandler;
+  }
+
+  public GetRunsCommand() {
+    this.contextHandler = new ContextHandler();
   }
 
   @Override

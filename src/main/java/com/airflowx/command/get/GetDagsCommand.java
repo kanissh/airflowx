@@ -1,6 +1,7 @@
 package com.airflowx.command.get;
 
 import com.airflowx.command.HelpMixin;
+import com.airflowx.completion.DagIdsCompletion;
 import com.airflowx.dto.dag.Dag;
 import com.airflowx.dto.dag.DagCollection;
 import com.airflowx.service.AirflowApi;
@@ -30,12 +31,16 @@ public class GetDagsCommand implements Callable<Integer> {
       "--paused"}, description = "Retrieve paused when --paused=true; unpaused when --paused=false; returns both when option is not set")
   private Boolean isPaused;
   @CommandLine.Option(names = {
-      "--pattern-string"}, description = "Pattern string to match with dag id")
+      "--pattern-string"}, description = "Pattern string to match with dag id", completionCandidates = DagIdsCompletion.class)
   private String dagIdPatternString;
 
   @Inject
   public GetDagsCommand(ContextHandler contextHandler) {
     this.contextHandler = contextHandler;
+  }
+
+  public GetDagsCommand() {
+    this.contextHandler = new ContextHandler();
   }
 
   @Override
