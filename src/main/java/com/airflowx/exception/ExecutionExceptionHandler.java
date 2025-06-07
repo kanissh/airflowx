@@ -10,7 +10,13 @@ public class ExecutionExceptionHandler implements IExecutionExceptionHandler {
   @Override
   public int handleExecutionException(Exception ex, CommandLine commandLine,
       ParseResult fullParseResult) throws Exception {
-    System.err.println(ex.getMessage());
+
+    if (ex instanceof jakarta.ws.rs.ProcessingException) {
+      System.err.println(
+          "Failed to connect to the airflow instance. " + ex.getCause().getMessage());
+    } else {
+      System.err.println(ex.getCause().getMessage());
+    }
     return ExitCode.USAGE;
   }
 }
