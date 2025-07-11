@@ -1,4 +1,4 @@
-package com.airflowx.command.get;
+package com.airflowx.command.dags;
 
 import com.airflowx.command.HelpMixin;
 import com.airflowx.completion.DagIdsCompletion;
@@ -16,10 +16,10 @@ import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import picocli.CommandLine;
 
 @CommandLine.Command(
-    name = "dag",
-    aliases = {"dags"},
+    name = "list",
+    aliases = {"ls"},
     description = "List DAGs available in the server")
-public class GetDagsCommand implements Callable<Integer> {
+public class DagsListCommand implements Callable<Integer> {
 
   private final ContextHandler contextHandler;
   @CommandLine.Mixin
@@ -35,11 +35,11 @@ public class GetDagsCommand implements Callable<Integer> {
   private String dagIdPatternString;
 
   @Inject
-  public GetDagsCommand(ContextHandler contextHandler) {
+  public DagsListCommand(ContextHandler contextHandler) {
     this.contextHandler = contextHandler;
   }
 
-  public GetDagsCommand() {
+  public DagsListCommand() {
     this.contextHandler = new ContextHandler();
   }
 

@@ -1,4 +1,4 @@
-package com.airflowx.command.trigger;
+package com.airflowx.command.dags;
 
 import com.airflowx.command.HelpMixin;
 import com.airflowx.completion.DagIdsCompletion;
@@ -12,10 +12,8 @@ import java.util.concurrent.Callable;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import picocli.CommandLine;
 
-@CommandLine.Command(
-    name = "dag",
-    description = "Trigger new run of the dag")
-public class TriggerDagCommand implements Callable<Integer> {
+@CommandLine.Command(name = "trigger", description = "Trigger new run of the dag")
+public class DagsTriggerCommand implements Callable<Integer> {
 
   private final DateTimeFormatter dagRunIdFormat =
       DateTimeFormatter.ofPattern("dd:MM:yyyy'T'hh:mm:ss:SSXXX");
@@ -26,11 +24,11 @@ public class TriggerDagCommand implements Callable<Integer> {
   private String dagId;
 
   @Inject
-  public TriggerDagCommand(ContextHandler contextHandler) {
+  public DagsTriggerCommand(ContextHandler contextHandler) {
     this.contextHandler = contextHandler;
   }
 
-  public TriggerDagCommand() {
+  public DagsTriggerCommand() {
     this.contextHandler = new ContextHandler();
   }
 

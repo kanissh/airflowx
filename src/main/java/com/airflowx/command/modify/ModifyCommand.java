@@ -1,4 +1,4 @@
-package com.airflowx.command.set;
+package com.airflowx.command.modify;
 
 import com.airflowx.command.HelpMixin;
 import picocli.CommandLine;

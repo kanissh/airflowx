@@ -1,4 +1,4 @@
-package com.airflowx.command.set;
+package com.airflowx.command.modify;
 
 import com.airflowx.command.HelpMixin;
 import com.airflowx.completion.DagIdsCompletion;
@@ -24,10 +24,10 @@ public class ModifyRunCommand implements Callable<Integer> {
   private HelpMixin help;
   @CommandLine.Parameters(index = "0", description = "Dag id", completionCandidates = DagIdsCompletion.class)
   private String dagId;
-  @CommandLine.Parameters(index = "1", description = "Dag run id")
+  @CommandLine.Option(names = {"--run"}, description = "Dag run id", required = true)
   private String dagRunId;
   @CommandLine.Option(names = {"--state"}, type = ModifyRunState.class,
-      description = "State to set the dag run to")
+      description = "State to set the dag run to", required = true)
   private ModifyRunState modifyRunState;
 
   @Inject
@@ -50,7 +50,7 @@ public class ModifyRunCommand implements Callable<Integer> {
     DagRun dagRun = airflowApi.modifyDagRunState(dagId, dagRunId,
         new DagRunModifyState(modifyRunState));
 
-    System.out.println("Run state set to '" + dagRun.getState() + "' in");
+    System.out.println("DAG run state set to '" + dagRun.getState() + "' in");
     System.out.println("DAG ID        " + dagId);
     System.out.println("DAG RUN ID    " + dagRunId);
     System.out.println();

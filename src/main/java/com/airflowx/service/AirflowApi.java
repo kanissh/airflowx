@@ -5,6 +5,8 @@ import com.airflowx.dto.dag.DagCollection;
 import com.airflowx.dto.dag.DagRun;
 import com.airflowx.dto.dag.DagRunCollection;
 import com.airflowx.dto.dag.DagRunModifyState;
+import com.airflowx.dto.error.ImportError;
+import com.airflowx.dto.error.ImportErrorCollection;
 import com.airflowx.dto.stats.DagStatsCollection;
 import com.airflowx.exception.AirflowResponseExceptionMapper;
 import jakarta.ws.rs.Consumes;
@@ -68,4 +70,11 @@ public interface AirflowApi {
   @Path("/dags/{dagId}/details")
   DagCollection getDetailedDagInformation(@PathParam("dagId") String dagId);
 
+  @GET
+  @Path("/importErrors/{import_error_id}")
+  ImportError getImportError(@PathParam("import_error_id") int importErrorId);
+
+  @GET
+  @Path("/importErrors")
+  ImportErrorCollection getAllImportErrors();
 }

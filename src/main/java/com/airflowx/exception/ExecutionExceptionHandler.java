@@ -15,7 +15,7 @@ public class ExecutionExceptionHandler implements IExecutionExceptionHandler {
       System.err.println(
           "Failed to connect to the airflow instance. " + ex.getCause().getMessage());
     } else {
-      System.err.println(ex.getCause().getMessage());
+      System.err.println(ex);
     }
     return ExitCode.USAGE;
   }

@@ -154,63 +154,87 @@ function compReplyArray() {
 # to generate possible options and subcommands for the last specified subcommand.
 function _complete_afx() {
   # Edge case: if command line has no space after subcommand, then don't assume this subcommand is selected (remkop/picocli#1468).
-  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} get" ];    then _picocli_afx; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dags" ];    then _picocli_afx; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag" ];    then _picocli_afx; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} import-errors" ];    then _picocli_afx; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} stat" ];    then _picocli_afx; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} config" ];    then _picocli_afx; return $?; fi
-  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} describe" ];    then _picocli_afx; return $?; fi
-  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} trigger" ];    then _picocli_afx; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} modify" ];    then _picocli_afx; return $?; fi
-  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} get dag" ];    then _picocli_afx_get; return $?; fi
-  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} get dags" ];    then _picocli_afx_get; return $?; fi
-  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} get run" ];    then _picocli_afx_get; return $?; fi
-  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} get runs" ];    then _picocli_afx_get; return $?; fi
-  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} get stats" ];    then _picocli_afx_get; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dags list" ];    then _picocli_afx_dags; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dags ls" ];    then _picocli_afx_dags; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dags stat" ];    then _picocli_afx_dags; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dags details" ];    then _picocli_afx_dags; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dags list-runs" ];    then _picocli_afx_dags; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dags ls-runs" ];    then _picocli_afx_dags; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dags trigger" ];    then _picocli_afx_dags; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag list" ];    then _picocli_afx_dag; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag ls" ];    then _picocli_afx_dag; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag stat" ];    then _picocli_afx_dag; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag details" ];    then _picocli_afx_dag; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag list-runs" ];    then _picocli_afx_dag; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag ls-runs" ];    then _picocli_afx_dag; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag trigger" ];    then _picocli_afx_dag; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} config set-context" ];    then _picocli_afx_config; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} config get-contexts" ];    then _picocli_afx_config; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} config current-context" ];    then _picocli_afx_config; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} config use-context" ];    then _picocli_afx_config; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} config remove-context" ];    then _picocli_afx_config; return $?; fi
-  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} describe dag" ];    then _picocli_afx_describe; return $?; fi
-  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} trigger dag" ];    then _picocli_afx_trigger; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} modify run" ];    then _picocli_afx_modify; return $?; fi
 
   # Find the longest sequence of subcommands and call the bash function for that subcommand.
-  local cmds0=(get)
-  local cmds1=(config)
-  local cmds2=(describe)
-  local cmds3=(trigger)
-  local cmds4=(modify)
-  local cmds5=(get dag)
-  local cmds6=(get dags)
-  local cmds7=(get run)
-  local cmds8=(get runs)
-  local cmds9=(get stats)
-  local cmds10=(config set-context)
-  local cmds11=(config get-contexts)
-  local cmds12=(config current-context)
-  local cmds13=(config use-context)
-  local cmds14=(config remove-context)
-  local cmds15=(describe dag)
-  local cmds16=(trigger dag)
-  local cmds17=(modify run)
+  local cmds0=(dags)
+  local cmds1=(dag)
+  local cmds2=(import-errors)
+  local cmds3=(stat)
+  local cmds4=(config)
+  local cmds5=(modify)
+  local cmds6=(dags list)
+  local cmds7=(dags ls)
+  local cmds8=(dags stat)
+  local cmds9=(dags details)
+  local cmds10=(dags list-runs)
+  local cmds11=(dags ls-runs)
+  local cmds12=(dags trigger)
+  local cmds13=(dag list)
+  local cmds14=(dag ls)
+  local cmds15=(dag stat)
+  local cmds16=(dag details)
+  local cmds17=(dag list-runs)
+  local cmds18=(dag ls-runs)
+  local cmds19=(dag trigger)
+  local cmds20=(config set-context)
+  local cmds21=(config get-contexts)
+  local cmds22=(config current-context)
+  local cmds23=(config use-context)
+  local cmds24=(config remove-context)
+  local cmds25=(modify run)
 
-  if CompWordsContainsArray "${cmds17[@]}"; then _picocli_afx_modify_run; return $?; fi
-  if CompWordsContainsArray "${cmds16[@]}"; then _picocli_afx_trigger_dag; return $?; fi
-  if CompWordsContainsArray "${cmds15[@]}"; then _picocli_afx_describe_dag; return $?; fi
-  if CompWordsContainsArray "${cmds14[@]}"; then _picocli_afx_config_removecontext; return $?; fi
-  if CompWordsContainsArray "${cmds13[@]}"; then _picocli_afx_config_usecontext; return $?; fi
-  if CompWordsContainsArray "${cmds12[@]}"; then _picocli_afx_config_currentcontext; return $?; fi
-  if CompWordsContainsArray "${cmds11[@]}"; then _picocli_afx_config_getcontexts; return $?; fi
-  if CompWordsContainsArray "${cmds10[@]}"; then _picocli_afx_config_setcontext; return $?; fi
-  if CompWordsContainsArray "${cmds9[@]}"; then _picocli_afx_get_stats; return $?; fi
-  if CompWordsContainsArray "${cmds8[@]}"; then _picocli_afx_get_runs; return $?; fi
-  if CompWordsContainsArray "${cmds7[@]}"; then _picocli_afx_get_run; return $?; fi
-  if CompWordsContainsArray "${cmds6[@]}"; then _picocli_afx_get_dags; return $?; fi
-  if CompWordsContainsArray "${cmds5[@]}"; then _picocli_afx_get_dag; return $?; fi
-  if CompWordsContainsArray "${cmds4[@]}"; then _picocli_afx_modify; return $?; fi
-  if CompWordsContainsArray "${cmds3[@]}"; then _picocli_afx_trigger; return $?; fi
-  if CompWordsContainsArray "${cmds2[@]}"; then _picocli_afx_describe; return $?; fi
-  if CompWordsContainsArray "${cmds1[@]}"; then _picocli_afx_config; return $?; fi
-  if CompWordsContainsArray "${cmds0[@]}"; then _picocli_afx_get; return $?; fi
+  if CompWordsContainsArray "${cmds25[@]}"; then _picocli_afx_modify_run; return $?; fi
+  if CompWordsContainsArray "${cmds24[@]}"; then _picocli_afx_config_removecontext; return $?; fi
+  if CompWordsContainsArray "${cmds23[@]}"; then _picocli_afx_config_usecontext; return $?; fi
+  if CompWordsContainsArray "${cmds22[@]}"; then _picocli_afx_config_currentcontext; return $?; fi
+  if CompWordsContainsArray "${cmds21[@]}"; then _picocli_afx_config_getcontexts; return $?; fi
+  if CompWordsContainsArray "${cmds20[@]}"; then _picocli_afx_config_setcontext; return $?; fi
+  if CompWordsContainsArray "${cmds19[@]}"; then _picocli_afx_dag_trigger; return $?; fi
+  if CompWordsContainsArray "${cmds18[@]}"; then _picocli_afx_dag_lsruns; return $?; fi
+  if CompWordsContainsArray "${cmds17[@]}"; then _picocli_afx_dag_listruns; return $?; fi
+  if CompWordsContainsArray "${cmds16[@]}"; then _picocli_afx_dag_details; return $?; fi
+  if CompWordsContainsArray "${cmds15[@]}"; then _picocli_afx_dag_stat; return $?; fi
+  if CompWordsContainsArray "${cmds14[@]}"; then _picocli_afx_dag_ls; return $?; fi
+  if CompWordsContainsArray "${cmds13[@]}"; then _picocli_afx_dag_list; return $?; fi
+  if CompWordsContainsArray "${cmds12[@]}"; then _picocli_afx_dags_trigger; return $?; fi
+  if CompWordsContainsArray "${cmds11[@]}"; then _picocli_afx_dags_lsruns; return $?; fi
+  if CompWordsContainsArray "${cmds10[@]}"; then _picocli_afx_dags_listruns; return $?; fi
+  if CompWordsContainsArray "${cmds9[@]}"; then _picocli_afx_dags_details; return $?; fi
+  if CompWordsContainsArray "${cmds8[@]}"; then _picocli_afx_dags_stat; return $?; fi
+  if CompWordsContainsArray "${cmds7[@]}"; then _picocli_afx_dags_ls; return $?; fi
+  if CompWordsContainsArray "${cmds6[@]}"; then _picocli_afx_dags_list; return $?; fi
+  if CompWordsContainsArray "${cmds5[@]}"; then _picocli_afx_modify; return $?; fi
+  if CompWordsContainsArray "${cmds4[@]}"; then _picocli_afx_config; return $?; fi
+  if CompWordsContainsArray "${cmds3[@]}"; then _picocli_afx_stat; return $?; fi
+  if CompWordsContainsArray "${cmds2[@]}"; then _picocli_afx_importerrors; return $?; fi
+  if CompWordsContainsArray "${cmds1[@]}"; then _picocli_afx_dag; return $?; fi
+  if CompWordsContainsArray "${cmds0[@]}"; then _picocli_afx_dags; return $?; fi
 
   # No subcommands were specified; generate completions for the top-level command.
   _picocli_afx; return $?;
@@ -221,7 +245,7 @@ function _picocli_afx() {
   # Get completion data
   local curr_word=${COMP_WORDS[COMP_CWORD]}
 
-  local commands="get config describe trigger modify"
+  local commands="dags dag import-errors stat config modify"
   local flag_opts="'-h' '--help' '-V' '--version'"
   local arg_opts=""
 
@@ -234,12 +258,12 @@ function _picocli_afx() {
   fi
 }
 
-# Generates completions for the options and subcommands of the `get` subcommand.
-function _picocli_afx_get() {
+# Generates completions for the options and subcommands of the `dags` subcommand.
+function _picocli_afx_dags() {
   # Get completion data
   local curr_word=${COMP_WORDS[COMP_CWORD]}
 
-  local commands="dag dags run runs stats"
+  local commands="list ls stat details list-runs ls-runs trigger"
   local flag_opts="'-h' '--help'"
   local arg_opts=""
 
@@ -247,6 +271,75 @@ function _picocli_afx_get() {
     COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
   else
     local positionals=""
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `dag` subcommand.
+function _picocli_afx_dag() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+
+  local commands="list ls stat details list-runs ls-runs trigger"
+  local flag_opts="'-h' '--help'"
+  local arg_opts=""
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `import-errors` subcommand.
+function _picocli_afx_importerrors() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+  local prev_word=${COMP_WORDS[COMP_CWORD-1]}
+
+  local commands=""
+  local flag_opts="'-h' '--help'"
+  local arg_opts="'--id'"
+
+  type compopt &>/dev/null && compopt +o default
+
+  case ${prev_word} in
+    '--id')
+      return
+      ;;
+  esac
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `stat` subcommand.
+function _picocli_afx_stat() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '--all'"
+  local arg_opts=""
+  local dagIdList_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local currIndex
+    currIndex=$(currentPositionalIndex "stat" "${arg_opts}" "${flag_opts}")
+    if (( currIndex >= 0 && currIndex <= 0 )); then
+      positionals=$( compReplyArray "${dagIdList_pos_param_args[@]}" )
+    fi
     local IFS=$'\n'
     COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
   fi
@@ -258,42 +351,6 @@ function _picocli_afx_config() {
   local curr_word=${COMP_WORDS[COMP_CWORD]}
 
   local commands="set-context get-contexts current-context use-context remove-context"
-  local flag_opts="'-h' '--help'"
-  local arg_opts=""
-
-  if [[ "${curr_word}" == -* ]]; then
-    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
-  else
-    local positionals=""
-    local IFS=$'\n'
-    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
-  fi
-}
-
-# Generates completions for the options and subcommands of the `describe` subcommand.
-function _picocli_afx_describe() {
-  # Get completion data
-  local curr_word=${COMP_WORDS[COMP_CWORD]}
-
-  local commands="dag"
-  local flag_opts="'-h' '--help'"
-  local arg_opts=""
-
-  if [[ "${curr_word}" == -* ]]; then
-    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
-  else
-    local positionals=""
-    local IFS=$'\n'
-    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
-  fi
-}
-
-# Generates completions for the options and subcommands of the `trigger` subcommand.
-function _picocli_afx_trigger() {
-  # Get completion data
-  local curr_word=${COMP_WORDS[COMP_CWORD]}
-
-  local commands="dag"
   local flag_opts="'-h' '--help'"
   local arg_opts=""
 
@@ -324,8 +381,8 @@ function _picocli_afx_modify() {
   fi
 }
 
-# Generates completions for the options and subcommands of the `dag` subcommand.
-function _picocli_afx_get_dag() {
+# Generates completions for the options and subcommands of the `list` subcommand.
+function _picocli_afx_dags_list() {
   # Get completion data
   local curr_word=${COMP_WORDS[COMP_CWORD]}
   local prev_word=${COMP_WORDS[COMP_CWORD-1]}
@@ -354,8 +411,8 @@ function _picocli_afx_get_dag() {
   fi
 }
 
-# Generates completions for the options and subcommands of the `dags` subcommand.
-function _picocli_afx_get_dags() {
+# Generates completions for the options and subcommands of the `ls` subcommand.
+function _picocli_afx_dags_ls() {
   # Get completion data
   local curr_word=${COMP_WORDS[COMP_CWORD]}
   local prev_word=${COMP_WORDS[COMP_CWORD-1]}
@@ -384,86 +441,8 @@ function _picocli_afx_get_dags() {
   fi
 }
 
-# Generates completions for the options and subcommands of the `run` subcommand.
-function _picocli_afx_get_run() {
-  # Get completion data
-  local curr_word=${COMP_WORDS[COMP_CWORD]}
-  local prev_word=${COMP_WORDS[COMP_CWORD-1]}
-
-  local commands=""
-  local flag_opts="'-h' '--help' '--sort-reverse'"
-  local arg_opts="'--limit' '--state'"
-  local dagRunStateList_option_args=("queued" "running" "success" "failed") # --state values
-
-  type compopt &>/dev/null && compopt +o default
-
-  case ${prev_word} in
-    '--limit')
-      return
-      ;;
-    '--state')
-      local IFS=$'\n'
-      COMPREPLY=( $( compReplyArray "${dagRunStateList_option_args[@]}" ) )
-      return $?
-      ;;
-  esac
-  local dagId_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
-
-  if [[ "${curr_word}" == -* ]]; then
-    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
-  else
-    local positionals=""
-    local currIndex
-    currIndex=$(currentPositionalIndex "run" "${arg_opts}" "${flag_opts}")
-    if (( currIndex >= 0 && currIndex <= 0 )); then
-      positionals=$( compReplyArray "${dagId_pos_param_args[@]}" )
-    fi
-    local IFS=$'\n'
-    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
-  fi
-}
-
-# Generates completions for the options and subcommands of the `runs` subcommand.
-function _picocli_afx_get_runs() {
-  # Get completion data
-  local curr_word=${COMP_WORDS[COMP_CWORD]}
-  local prev_word=${COMP_WORDS[COMP_CWORD-1]}
-
-  local commands=""
-  local flag_opts="'-h' '--help' '--sort-reverse'"
-  local arg_opts="'--limit' '--state'"
-  local dagRunStateList_option_args=("queued" "running" "success" "failed") # --state values
-
-  type compopt &>/dev/null && compopt +o default
-
-  case ${prev_word} in
-    '--limit')
-      return
-      ;;
-    '--state')
-      local IFS=$'\n'
-      COMPREPLY=( $( compReplyArray "${dagRunStateList_option_args[@]}" ) )
-      return $?
-      ;;
-  esac
-  local dagId_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
-
-  if [[ "${curr_word}" == -* ]]; then
-    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
-  else
-    local positionals=""
-    local currIndex
-    currIndex=$(currentPositionalIndex "runs" "${arg_opts}" "${flag_opts}")
-    if (( currIndex >= 0 && currIndex <= 0 )); then
-      positionals=$( compReplyArray "${dagId_pos_param_args[@]}" )
-    fi
-    local IFS=$'\n'
-    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
-  fi
-}
-
-# Generates completions for the options and subcommands of the `stats` subcommand.
-function _picocli_afx_get_stats() {
+# Generates completions for the options and subcommands of the `stat` subcommand.
+function _picocli_afx_dags_stat() {
   # Get completion data
   local curr_word=${COMP_WORDS[COMP_CWORD]}
 
@@ -477,9 +456,345 @@ function _picocli_afx_get_stats() {
   else
     local positionals=""
     local currIndex
-    currIndex=$(currentPositionalIndex "stats" "${arg_opts}" "${flag_opts}")
+    currIndex=$(currentPositionalIndex "stat" "${arg_opts}" "${flag_opts}")
     if (( currIndex >= 0 && currIndex <= 0 )); then
       positionals=$( compReplyArray "${dagIdList_pos_param_args[@]}" )
+    fi
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `details` subcommand.
+function _picocli_afx_dags_details() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '-v' '--verbose'"
+  local arg_opts=""
+  local dagId_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local currIndex
+    currIndex=$(currentPositionalIndex "details" "${arg_opts}" "${flag_opts}")
+    if (( currIndex >= 0 && currIndex <= 0 )); then
+      positionals=$( compReplyArray "${dagId_pos_param_args[@]}" )
+    fi
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `list-runs` subcommand.
+function _picocli_afx_dags_listruns() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+  local prev_word=${COMP_WORDS[COMP_CWORD-1]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '--sort-reverse'"
+  local arg_opts="'--limit' '--state'"
+  local dagRunStateList_option_args=("queued" "running" "success" "failed") # --state values
+
+  type compopt &>/dev/null && compopt +o default
+
+  case ${prev_word} in
+    '--limit')
+      return
+      ;;
+    '--state')
+      local IFS=$'\n'
+      COMPREPLY=( $( compReplyArray "${dagRunStateList_option_args[@]}" ) )
+      return $?
+      ;;
+  esac
+  local dagId_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local currIndex
+    currIndex=$(currentPositionalIndex "list-runs" "${arg_opts}" "${flag_opts}")
+    if (( currIndex >= 0 && currIndex <= 0 )); then
+      positionals=$( compReplyArray "${dagId_pos_param_args[@]}" )
+    fi
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `ls-runs` subcommand.
+function _picocli_afx_dags_lsruns() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+  local prev_word=${COMP_WORDS[COMP_CWORD-1]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '--sort-reverse'"
+  local arg_opts="'--limit' '--state'"
+  local dagRunStateList_option_args=("queued" "running" "success" "failed") # --state values
+
+  type compopt &>/dev/null && compopt +o default
+
+  case ${prev_word} in
+    '--limit')
+      return
+      ;;
+    '--state')
+      local IFS=$'\n'
+      COMPREPLY=( $( compReplyArray "${dagRunStateList_option_args[@]}" ) )
+      return $?
+      ;;
+  esac
+  local dagId_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local currIndex
+    currIndex=$(currentPositionalIndex "ls-runs" "${arg_opts}" "${flag_opts}")
+    if (( currIndex >= 0 && currIndex <= 0 )); then
+      positionals=$( compReplyArray "${dagId_pos_param_args[@]}" )
+    fi
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `trigger` subcommand.
+function _picocli_afx_dags_trigger() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+
+  local commands=""
+  local flag_opts="'-h' '--help'"
+  local arg_opts=""
+  local dagId_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local currIndex
+    currIndex=$(currentPositionalIndex "trigger" "${arg_opts}" "${flag_opts}")
+    if (( currIndex >= 0 && currIndex <= 0 )); then
+      positionals=$( compReplyArray "${dagId_pos_param_args[@]}" )
+    fi
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `list` subcommand.
+function _picocli_afx_dag_list() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+  local prev_word=${COMP_WORDS[COMP_CWORD-1]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '--only-active' '--paused'"
+  local arg_opts="'--pattern-string'"
+  local dagIdPatternString_option_args=(`afx dag-ids-completion`) # --pattern-string values
+
+  type compopt &>/dev/null && compopt +o default
+
+  case ${prev_word} in
+    '--pattern-string')
+      local IFS=$'\n'
+      COMPREPLY=( $( compReplyArray "${dagIdPatternString_option_args[@]}" ) )
+      return $?
+      ;;
+  esac
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `ls` subcommand.
+function _picocli_afx_dag_ls() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+  local prev_word=${COMP_WORDS[COMP_CWORD-1]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '--only-active' '--paused'"
+  local arg_opts="'--pattern-string'"
+  local dagIdPatternString_option_args=(`afx dag-ids-completion`) # --pattern-string values
+
+  type compopt &>/dev/null && compopt +o default
+
+  case ${prev_word} in
+    '--pattern-string')
+      local IFS=$'\n'
+      COMPREPLY=( $( compReplyArray "${dagIdPatternString_option_args[@]}" ) )
+      return $?
+      ;;
+  esac
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `stat` subcommand.
+function _picocli_afx_dag_stat() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '--all'"
+  local arg_opts=""
+  local dagIdList_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local currIndex
+    currIndex=$(currentPositionalIndex "stat" "${arg_opts}" "${flag_opts}")
+    if (( currIndex >= 0 && currIndex <= 0 )); then
+      positionals=$( compReplyArray "${dagIdList_pos_param_args[@]}" )
+    fi
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `details` subcommand.
+function _picocli_afx_dag_details() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '-v' '--verbose'"
+  local arg_opts=""
+  local dagId_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local currIndex
+    currIndex=$(currentPositionalIndex "details" "${arg_opts}" "${flag_opts}")
+    if (( currIndex >= 0 && currIndex <= 0 )); then
+      positionals=$( compReplyArray "${dagId_pos_param_args[@]}" )
+    fi
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `list-runs` subcommand.
+function _picocli_afx_dag_listruns() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+  local prev_word=${COMP_WORDS[COMP_CWORD-1]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '--sort-reverse'"
+  local arg_opts="'--limit' '--state'"
+  local dagRunStateList_option_args=("queued" "running" "success" "failed") # --state values
+
+  type compopt &>/dev/null && compopt +o default
+
+  case ${prev_word} in
+    '--limit')
+      return
+      ;;
+    '--state')
+      local IFS=$'\n'
+      COMPREPLY=( $( compReplyArray "${dagRunStateList_option_args[@]}" ) )
+      return $?
+      ;;
+  esac
+  local dagId_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local currIndex
+    currIndex=$(currentPositionalIndex "list-runs" "${arg_opts}" "${flag_opts}")
+    if (( currIndex >= 0 && currIndex <= 0 )); then
+      positionals=$( compReplyArray "${dagId_pos_param_args[@]}" )
+    fi
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `ls-runs` subcommand.
+function _picocli_afx_dag_lsruns() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+  local prev_word=${COMP_WORDS[COMP_CWORD-1]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '--sort-reverse'"
+  local arg_opts="'--limit' '--state'"
+  local dagRunStateList_option_args=("queued" "running" "success" "failed") # --state values
+
+  type compopt &>/dev/null && compopt +o default
+
+  case ${prev_word} in
+    '--limit')
+      return
+      ;;
+    '--state')
+      local IFS=$'\n'
+      COMPREPLY=( $( compReplyArray "${dagRunStateList_option_args[@]}" ) )
+      return $?
+      ;;
+  esac
+  local dagId_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local currIndex
+    currIndex=$(currentPositionalIndex "ls-runs" "${arg_opts}" "${flag_opts}")
+    if (( currIndex >= 0 && currIndex <= 0 )); then
+      positionals=$( compReplyArray "${dagId_pos_param_args[@]}" )
+    fi
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `trigger` subcommand.
+function _picocli_afx_dag_trigger() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+
+  local commands=""
+  local flag_opts="'-h' '--help'"
+  local arg_opts=""
+  local dagId_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local currIndex
+    currIndex=$(currentPositionalIndex "trigger" "${arg_opts}" "${flag_opts}")
+    if (( currIndex >= 0 && currIndex <= 0 )); then
+      positionals=$( compReplyArray "${dagId_pos_param_args[@]}" )
     fi
     local IFS=$'\n'
     COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
@@ -591,54 +906,6 @@ function _picocli_afx_config_removecontext() {
   fi
 }
 
-# Generates completions for the options and subcommands of the `dag` subcommand.
-function _picocli_afx_describe_dag() {
-  # Get completion data
-  local curr_word=${COMP_WORDS[COMP_CWORD]}
-
-  local commands=""
-  local flag_opts="'-h' '--help' '-v' '--verbose'"
-  local arg_opts=""
-  local dagId_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
-
-  if [[ "${curr_word}" == -* ]]; then
-    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
-  else
-    local positionals=""
-    local currIndex
-    currIndex=$(currentPositionalIndex "dag" "${arg_opts}" "${flag_opts}")
-    if (( currIndex >= 0 && currIndex <= 0 )); then
-      positionals=$( compReplyArray "${dagId_pos_param_args[@]}" )
-    fi
-    local IFS=$'\n'
-    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
-  fi
-}
-
-# Generates completions for the options and subcommands of the `dag` subcommand.
-function _picocli_afx_trigger_dag() {
-  # Get completion data
-  local curr_word=${COMP_WORDS[COMP_CWORD]}
-
-  local commands=""
-  local flag_opts="'-h' '--help'"
-  local arg_opts=""
-  local dagId_pos_param_args=(`afx dag-ids-completion`) # 0-0 values
-
-  if [[ "${curr_word}" == -* ]]; then
-    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
-  else
-    local positionals=""
-    local currIndex
-    currIndex=$(currentPositionalIndex "dag" "${arg_opts}" "${flag_opts}")
-    if (( currIndex >= 0 && currIndex <= 0 )); then
-      positionals=$( compReplyArray "${dagId_pos_param_args[@]}" )
-    fi
-    local IFS=$'\n'
-    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
-  fi
-}
-
 # Generates completions for the options and subcommands of the `run` subcommand.
 function _picocli_afx_modify_run() {
   # Get completion data
@@ -647,12 +914,15 @@ function _picocli_afx_modify_run() {
 
   local commands=""
   local flag_opts="'-h' '--help'"
-  local arg_opts="'--state'"
+  local arg_opts="'--run' '--state'"
   local modifyRunState_option_args=("success" "failed") # --state values
 
   type compopt &>/dev/null && compopt +o default
 
   case ${prev_word} in
+    '--run')
+      return
+      ;;
     '--state')
       local IFS=$'\n'
       COMPREPLY=( $( compReplyArray "${modifyRunState_option_args[@]}" ) )

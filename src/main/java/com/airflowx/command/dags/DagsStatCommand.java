@@ -1,4 +1,4 @@
-package com.airflowx.command.get;
+package com.airflowx.command.dags;
 
 import com.airflowx.command.HelpMixin;
 import com.airflowx.completion.DagIdsCompletion;
@@ -19,9 +19,9 @@ import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import picocli.CommandLine;
 
 @CommandLine.Command(
-    name = "stats",
+    name = "stat",
     description = "Get statistics of DAGs")
-public class GetStatsCommand implements Runnable {
+public class DagsStatCommand implements Runnable {
 
   private final ContextHandler contextHandler;
   @CommandLine.Mixin
@@ -32,16 +32,16 @@ public class GetStatsCommand implements Runnable {
   private Boolean isAll;
 
   @Inject
-  public GetStatsCommand(ContextHandler contextHandler) {
+  public DagsStatCommand(ContextHandler contextHandler) {
     this.contextHandler = contextHandler;
   }
 
-  public GetStatsCommand() {
+  public DagsStatCommand() {
     this.contextHandler = new ContextHandler();
   }
 
   private String getCommaSeparatedDagIds(AirflowApi airflowApi) {
-    if (Objects.isNull(isAll)) {
+    if (Objects.isNull(isAll) && Objects.nonNull(dagIdList)) {
       return String.join(",", dagIdList);
     }
 

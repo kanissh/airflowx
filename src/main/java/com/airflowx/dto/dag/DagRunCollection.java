@@ -9,6 +9,6 @@ import lombok.Getter;
 public class DagRunCollection extends CollectionInfo {
 
   @JsonProperty("dag_runs")
-  List<DagRun> dagRunList;
+  private List<DagRun> dagRunList;
 
 }
