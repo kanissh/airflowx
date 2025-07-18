@@ -167,6 +167,8 @@ function _complete_afx() {
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dags list-runs" ];    then _picocli_afx_dags; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dags ls-runs" ];    then _picocli_afx_dags; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dags trigger" ];    then _picocli_afx_dags; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dags pause" ];    then _picocli_afx_dags; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dags unpause" ];    then _picocli_afx_dags; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag list" ];    then _picocli_afx_dag; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag ls" ];    then _picocli_afx_dag; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag stat" ];    then _picocli_afx_dag; return $?; fi
@@ -174,6 +176,8 @@ function _complete_afx() {
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag list-runs" ];    then _picocli_afx_dag; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag ls-runs" ];    then _picocli_afx_dag; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag trigger" ];    then _picocli_afx_dag; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag pause" ];    then _picocli_afx_dag; return $?; fi
+  if [ "${COMP_LINE}" = "${COMP_WORDS[0]} dag unpause" ];    then _picocli_afx_dag; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} config set-context" ];    then _picocli_afx_config; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} config get-contexts" ];    then _picocli_afx_config; return $?; fi
   if [ "${COMP_LINE}" = "${COMP_WORDS[0]} config current-context" ];    then _picocli_afx_config; return $?; fi
@@ -195,33 +199,41 @@ function _complete_afx() {
   local cmds10=(dags list-runs)
   local cmds11=(dags ls-runs)
   local cmds12=(dags trigger)
-  local cmds13=(dag list)
-  local cmds14=(dag ls)
-  local cmds15=(dag stat)
-  local cmds16=(dag details)
-  local cmds17=(dag list-runs)
-  local cmds18=(dag ls-runs)
-  local cmds19=(dag trigger)
-  local cmds20=(config set-context)
-  local cmds21=(config get-contexts)
-  local cmds22=(config current-context)
-  local cmds23=(config use-context)
-  local cmds24=(config remove-context)
-  local cmds25=(modify run)
+  local cmds13=(dags pause)
+  local cmds14=(dags unpause)
+  local cmds15=(dag list)
+  local cmds16=(dag ls)
+  local cmds17=(dag stat)
+  local cmds18=(dag details)
+  local cmds19=(dag list-runs)
+  local cmds20=(dag ls-runs)
+  local cmds21=(dag trigger)
+  local cmds22=(dag pause)
+  local cmds23=(dag unpause)
+  local cmds24=(config set-context)
+  local cmds25=(config get-contexts)
+  local cmds26=(config current-context)
+  local cmds27=(config use-context)
+  local cmds28=(config remove-context)
+  local cmds29=(modify run)
 
-  if CompWordsContainsArray "${cmds25[@]}"; then _picocli_afx_modify_run; return $?; fi
-  if CompWordsContainsArray "${cmds24[@]}"; then _picocli_afx_config_removecontext; return $?; fi
-  if CompWordsContainsArray "${cmds23[@]}"; then _picocli_afx_config_usecontext; return $?; fi
-  if CompWordsContainsArray "${cmds22[@]}"; then _picocli_afx_config_currentcontext; return $?; fi
-  if CompWordsContainsArray "${cmds21[@]}"; then _picocli_afx_config_getcontexts; return $?; fi
-  if CompWordsContainsArray "${cmds20[@]}"; then _picocli_afx_config_setcontext; return $?; fi
-  if CompWordsContainsArray "${cmds19[@]}"; then _picocli_afx_dag_trigger; return $?; fi
-  if CompWordsContainsArray "${cmds18[@]}"; then _picocli_afx_dag_lsruns; return $?; fi
-  if CompWordsContainsArray "${cmds17[@]}"; then _picocli_afx_dag_listruns; return $?; fi
-  if CompWordsContainsArray "${cmds16[@]}"; then _picocli_afx_dag_details; return $?; fi
-  if CompWordsContainsArray "${cmds15[@]}"; then _picocli_afx_dag_stat; return $?; fi
-  if CompWordsContainsArray "${cmds14[@]}"; then _picocli_afx_dag_ls; return $?; fi
-  if CompWordsContainsArray "${cmds13[@]}"; then _picocli_afx_dag_list; return $?; fi
+  if CompWordsContainsArray "${cmds29[@]}"; then _picocli_afx_modify_run; return $?; fi
+  if CompWordsContainsArray "${cmds28[@]}"; then _picocli_afx_config_removecontext; return $?; fi
+  if CompWordsContainsArray "${cmds27[@]}"; then _picocli_afx_config_usecontext; return $?; fi
+  if CompWordsContainsArray "${cmds26[@]}"; then _picocli_afx_config_currentcontext; return $?; fi
+  if CompWordsContainsArray "${cmds25[@]}"; then _picocli_afx_config_getcontexts; return $?; fi
+  if CompWordsContainsArray "${cmds24[@]}"; then _picocli_afx_config_setcontext; return $?; fi
+  if CompWordsContainsArray "${cmds23[@]}"; then _picocli_afx_dag_unpause; return $?; fi
+  if CompWordsContainsArray "${cmds22[@]}"; then _picocli_afx_dag_pause; return $?; fi
+  if CompWordsContainsArray "${cmds21[@]}"; then _picocli_afx_dag_trigger; return $?; fi
+  if CompWordsContainsArray "${cmds20[@]}"; then _picocli_afx_dag_lsruns; return $?; fi
+  if CompWordsContainsArray "${cmds19[@]}"; then _picocli_afx_dag_listruns; return $?; fi
+  if CompWordsContainsArray "${cmds18[@]}"; then _picocli_afx_dag_details; return $?; fi
+  if CompWordsContainsArray "${cmds17[@]}"; then _picocli_afx_dag_stat; return $?; fi
+  if CompWordsContainsArray "${cmds16[@]}"; then _picocli_afx_dag_ls; return $?; fi
+  if CompWordsContainsArray "${cmds15[@]}"; then _picocli_afx_dag_list; return $?; fi
+  if CompWordsContainsArray "${cmds14[@]}"; then _picocli_afx_dags_unpause; return $?; fi
+  if CompWordsContainsArray "${cmds13[@]}"; then _picocli_afx_dags_pause; return $?; fi
   if CompWordsContainsArray "${cmds12[@]}"; then _picocli_afx_dags_trigger; return $?; fi
   if CompWordsContainsArray "${cmds11[@]}"; then _picocli_afx_dags_lsruns; return $?; fi
   if CompWordsContainsArray "${cmds10[@]}"; then _picocli_afx_dags_listruns; return $?; fi
@@ -263,7 +275,7 @@ function _picocli_afx_dags() {
   # Get completion data
   local curr_word=${COMP_WORDS[COMP_CWORD]}
 
-  local commands="list ls stat details list-runs ls-runs trigger"
+  local commands="list ls stat details list-runs ls-runs trigger pause unpause"
   local flag_opts="'-h' '--help'"
   local arg_opts=""
 
@@ -281,7 +293,7 @@ function _picocli_afx_dag() {
   # Get completion data
   local curr_word=${COMP_WORDS[COMP_CWORD]}
 
-  local commands="list ls stat details list-runs ls-runs trigger"
+  local commands="list ls stat details list-runs ls-runs trigger pause unpause"
   local flag_opts="'-h' '--help'"
   local arg_opts=""
 
@@ -389,15 +401,15 @@ function _picocli_afx_dags_list() {
 
   local commands=""
   local flag_opts="'-h' '--help' '--only-active' '--paused'"
-  local arg_opts="'--pattern-string'"
-  local dagIdPatternString_option_args=(`afx dag-ids-completion`) # --pattern-string values
+  local arg_opts="'--pattern'"
+  local dagIdPattern_option_args=(`afx dag-ids-completion`) # --pattern values
 
   type compopt &>/dev/null && compopt +o default
 
   case ${prev_word} in
-    '--pattern-string')
+    '--pattern')
       local IFS=$'\n'
-      COMPREPLY=( $( compReplyArray "${dagIdPatternString_option_args[@]}" ) )
+      COMPREPLY=( $( compReplyArray "${dagIdPattern_option_args[@]}" ) )
       return $?
       ;;
   esac
@@ -419,15 +431,15 @@ function _picocli_afx_dags_ls() {
 
   local commands=""
   local flag_opts="'-h' '--help' '--only-active' '--paused'"
-  local arg_opts="'--pattern-string'"
-  local dagIdPatternString_option_args=(`afx dag-ids-completion`) # --pattern-string values
+  local arg_opts="'--pattern'"
+  local dagIdPattern_option_args=(`afx dag-ids-completion`) # --pattern values
 
   type compopt &>/dev/null && compopt +o default
 
   case ${prev_word} in
-    '--pattern-string')
+    '--pattern')
       local IFS=$'\n'
-      COMPREPLY=( $( compReplyArray "${dagIdPatternString_option_args[@]}" ) )
+      COMPREPLY=( $( compReplyArray "${dagIdPattern_option_args[@]}" ) )
       return $?
       ;;
   esac
@@ -591,6 +603,72 @@ function _picocli_afx_dags_trigger() {
   fi
 }
 
+# Generates completions for the options and subcommands of the `pause` subcommand.
+function _picocli_afx_dags_pause() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+  local prev_word=${COMP_WORDS[COMP_CWORD-1]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '--all'"
+  local arg_opts="'--dag-id' '--pattern'"
+  local dagId_option_args=(`afx dag-ids-completion`) # --dag-id values
+
+  type compopt &>/dev/null && compopt +o default
+
+  case ${prev_word} in
+    '--dag-id')
+      local IFS=$'\n'
+      COMPREPLY=( $( compReplyArray "${dagId_option_args[@]}" ) )
+      return $?
+      ;;
+    '--pattern')
+      return
+      ;;
+  esac
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `unpause` subcommand.
+function _picocli_afx_dags_unpause() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+  local prev_word=${COMP_WORDS[COMP_CWORD-1]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '--all'"
+  local arg_opts="'--dag-id' '--pattern'"
+  local dagId_option_args=(`afx dag-ids-completion`) # --dag-id values
+
+  type compopt &>/dev/null && compopt +o default
+
+  case ${prev_word} in
+    '--dag-id')
+      local IFS=$'\n'
+      COMPREPLY=( $( compReplyArray "${dagId_option_args[@]}" ) )
+      return $?
+      ;;
+    '--pattern')
+      return
+      ;;
+  esac
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
 # Generates completions for the options and subcommands of the `list` subcommand.
 function _picocli_afx_dag_list() {
   # Get completion data
@@ -599,15 +677,15 @@ function _picocli_afx_dag_list() {
 
   local commands=""
   local flag_opts="'-h' '--help' '--only-active' '--paused'"
-  local arg_opts="'--pattern-string'"
-  local dagIdPatternString_option_args=(`afx dag-ids-completion`) # --pattern-string values
+  local arg_opts="'--pattern'"
+  local dagIdPattern_option_args=(`afx dag-ids-completion`) # --pattern values
 
   type compopt &>/dev/null && compopt +o default
 
   case ${prev_word} in
-    '--pattern-string')
+    '--pattern')
       local IFS=$'\n'
-      COMPREPLY=( $( compReplyArray "${dagIdPatternString_option_args[@]}" ) )
+      COMPREPLY=( $( compReplyArray "${dagIdPattern_option_args[@]}" ) )
       return $?
       ;;
   esac
@@ -629,15 +707,15 @@ function _picocli_afx_dag_ls() {
 
   local commands=""
   local flag_opts="'-h' '--help' '--only-active' '--paused'"
-  local arg_opts="'--pattern-string'"
-  local dagIdPatternString_option_args=(`afx dag-ids-completion`) # --pattern-string values
+  local arg_opts="'--pattern'"
+  local dagIdPattern_option_args=(`afx dag-ids-completion`) # --pattern values
 
   type compopt &>/dev/null && compopt +o default
 
   case ${prev_word} in
-    '--pattern-string')
+    '--pattern')
       local IFS=$'\n'
-      COMPREPLY=( $( compReplyArray "${dagIdPatternString_option_args[@]}" ) )
+      COMPREPLY=( $( compReplyArray "${dagIdPattern_option_args[@]}" ) )
       return $?
       ;;
   esac
@@ -796,6 +874,72 @@ function _picocli_afx_dag_trigger() {
     if (( currIndex >= 0 && currIndex <= 0 )); then
       positionals=$( compReplyArray "${dagId_pos_param_args[@]}" )
     fi
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `pause` subcommand.
+function _picocli_afx_dag_pause() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+  local prev_word=${COMP_WORDS[COMP_CWORD-1]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '--all'"
+  local arg_opts="'--dag-id' '--pattern'"
+  local dagId_option_args=(`afx dag-ids-completion`) # --dag-id values
+
+  type compopt &>/dev/null && compopt +o default
+
+  case ${prev_word} in
+    '--dag-id')
+      local IFS=$'\n'
+      COMPREPLY=( $( compReplyArray "${dagId_option_args[@]}" ) )
+      return $?
+      ;;
+    '--pattern')
+      return
+      ;;
+  esac
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
+    local IFS=$'\n'
+    COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
+  fi
+}
+
+# Generates completions for the options and subcommands of the `unpause` subcommand.
+function _picocli_afx_dag_unpause() {
+  # Get completion data
+  local curr_word=${COMP_WORDS[COMP_CWORD]}
+  local prev_word=${COMP_WORDS[COMP_CWORD-1]}
+
+  local commands=""
+  local flag_opts="'-h' '--help' '--all'"
+  local arg_opts="'--dag-id' '--pattern'"
+  local dagId_option_args=(`afx dag-ids-completion`) # --dag-id values
+
+  type compopt &>/dev/null && compopt +o default
+
+  case ${prev_word} in
+    '--dag-id')
+      local IFS=$'\n'
+      COMPREPLY=( $( compReplyArray "${dagId_option_args[@]}" ) )
+      return $?
+      ;;
+    '--pattern')
+      return
+      ;;
+  esac
+
+  if [[ "${curr_word}" == -* ]]; then
+    COMPREPLY=( $(compgen -W "${flag_opts} ${arg_opts}" -- "${curr_word}") )
+  else
+    local positionals=""
     local IFS=$'\n'
     COMPREPLY=( $(compgen -W "${commands// /$'\n'}${IFS}${positionals}" -- "${curr_word}") )
   fi

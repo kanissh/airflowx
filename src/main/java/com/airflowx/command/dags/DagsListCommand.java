@@ -31,8 +31,8 @@ public class DagsListCommand implements Callable<Integer> {
       "--paused"}, description = "Retrieve paused when --paused=true; unpaused when --paused=false; returns both when option is not set")
   private Boolean isPaused;
   @CommandLine.Option(names = {
-      "--pattern-string"}, description = "Pattern string to match with dag id", completionCandidates = DagIdsCompletion.class)
-  private String dagIdPatternString;
+      "--pattern"}, description = "Pattern string to match with dag id", completionCandidates = DagIdsCompletion.class)
+  private String dagIdPattern;
 
   @Inject
   public DagsListCommand(ContextHandler contextHandler) {
@@ -53,7 +53,7 @@ public class DagsListCommand implements Callable<Integer> {
     //setting the field list does not return total_entries field
     //keeping the parameter in the request and passing null to overcome this
     DagCollection dagCollection = airflowApi.getDagList(onlyActive, isPaused, null,
-        dagIdPatternString);
+        dagIdPattern);
 
     String dagInfoTable = AsciiTable.builder()
         .border(AsciiTable.NO_BORDERS)

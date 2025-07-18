@@ -11,7 +11,9 @@ import picocli.CommandLine;
         DagsStatCommand.class,
         DagsDetailsCommand.class,
         DagsListRunsCommand.class,
-        DagsTriggerCommand.class
+        DagsTriggerCommand.class,
+        DagsPauseCommand.class,
+        DagsUnpauseCommand.class
     },
     description = "Manage DAGs")
 public class DagsCommand {

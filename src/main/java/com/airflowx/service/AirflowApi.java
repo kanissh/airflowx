@@ -2,6 +2,7 @@ package com.airflowx.service;
 
 import com.airflowx.dto.dag.Dag;
 import com.airflowx.dto.dag.DagCollection;
+import com.airflowx.dto.dag.DagIsPaused;
 import com.airflowx.dto.dag.DagRun;
 import com.airflowx.dto.dag.DagRunCollection;
 import com.airflowx.dto.dag.DagRunModifyState;
@@ -77,4 +78,14 @@ public interface AirflowApi {
   @GET
   @Path("/importErrors")
   ImportErrorCollection getAllImportErrors();
+
+  @PATCH
+  @Path("/dags")
+  DagCollection updateAllDagsPauseState(@QueryParam("dag_id_pattern") String dagIdPattern,
+      DagIsPaused dagIsPaused);
+
+  @PATCH
+  @Path("/dags/{dag_id}")
+  Dag updateDagPauseState(@PathParam("dag_id") String dagId, DagIsPaused dagIsPaused);
+
 }
