@@ -1,0 +1,45 @@
+name: Publish release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout sources
+        uses: actions/checkout@v4
+
+      - name: setup java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'graalvm'
+          java-version: 21.0.6
+
+      - name: setup gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: get application version from build.gradle
+        run: |
+          chmod +x gradlew
+          VERSION=$(./gradlew -q properties | grep "^version:" | awk '{print $2}')
+          echo "version: $VERSION"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: build uber jar
+        run: |
+          ./gradlew -Dquarkus.package.jar.type=uber-jar build
+          mv build/airflowx-${{ env.VERSION }}-runner.jar build/airflowx-${{ env.VERSION }}.jar
+
+      - name: publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          make_latest: "true"
+          files: build/airflowx-${{ env.VERSION }}.jar
