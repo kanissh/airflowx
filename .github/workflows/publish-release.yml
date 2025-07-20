@@ -36,10 +36,17 @@ jobs:
           ./gradlew -Dquarkus.package.jar.type=uber-jar build
           mv build/airflowx-${{ env.VERSION }}-runner.jar build/airflowx-${{ env.VERSION }}.jar
 
+      - name: build native
+        run: |
+          ./gradlew build -Dquarkus.native.enabled=true -Dquarkus.package.jar.enabled=false 
+          mv build/airflowx-${{ env.VERSION }}-runner build/airflowx-${{ env.VERSION }}-linux
+
       - name: publish release
         uses: softprops/action-gh-release@v2
         with:
           name: ${{ github.ref_name }}
           generate_release_notes: true
           make_latest: "true"
-          files: build/airflowx-${{ env.VERSION }}.jar
+          files: |
+            build/airflowx-${{ env.VERSION }}.jar
+            build/airflowx-${{ env.VERSION }}-linux
