@@ -172,13 +172,14 @@ afx dags list-runs [-h] <DAG ID> [--sort-reverse] [--limit=<number>] [--state=<s
 **Description:** Get statistics of DAGs.
 
 ```
-afx dags stat [-h] [--all]
+afx dags stat [-h] [--all] [<dagIdList>[,<dagIdList>...]]
 ```  
 
 **Options:**
 
 - `-h, --help` - Show help message and exit.
 - `--all` - Include statistics for all DAGs.
+- `<dagIdList>` - Comma separated list of DAG ids.
 
 ---
 

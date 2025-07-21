@@ -3,7 +3,6 @@ package com.airflowx.command;
 import com.airflowx.command.completion.DagIdsCompletionCandidateCommand;
 import com.airflowx.command.config.ConfigCommand;
 import com.airflowx.command.dags.DagsCommand;
-import com.airflowx.command.dags.DagsStatCommand;
 import com.airflowx.command.importerror.ImportErrorsCommand;
 import com.airflowx.command.modify.ModifyCommand;
 import com.airflowx.exception.ExecutionExceptionHandler;
@@ -20,7 +19,6 @@ import picocli.CommandLine;
     subcommands = {
         DagsCommand.class,
         ImportErrorsCommand.class,
-        DagsStatCommand.class,
         ConfigCommand.class,
         ModifyCommand.class,
         DagIdsCompletionCandidateCommand.class
